@@ -31,7 +31,3 @@ graph TD
 - Web server (Apache/Nginx) or PHP built-in server
 
 ### Installation
-```bash
-git clone https://github.com/yourusername/upi-payment-gateway.git
-cd upi-payment-gateway
-php -S localhost:8000
