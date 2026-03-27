@@ -1,0 +1,22 @@
+{
+  "name": "@ayushsolanki29/payment-gateway",
+  "version": "0.0.2",
+  "description": "UPI Payment Gateway Simulator (WIP)",
+  "main": "index.js",
+  "keywords": ["upi", "payment", "gateway", "simulator"],
+  "author": "Ayush Solanki",
+  "license": "MIT",
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayushsolanki29/payment-gateway.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ayushsolanki29/payment-gateway/issues"
+  },
+  "homepage": "https://github.com/ayushsolanki29/payment-gateway#readme"
+}
