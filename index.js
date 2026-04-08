@@ -1,2 +1,1 @@
-// placeholder for future implementation
-module.exports = {};
+module.exports = require("./payment-gateway");

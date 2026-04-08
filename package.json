@@ -1,20 +1,36 @@
 {
-  "name": "@ayushsolanki29/payment-gateway",
-  "version": "0.0.2",
-  "description": "UPI Payment Gateway Simulator (WIP)",
+  "name": "upi-pay-kit",
+  "version": "2.0.0",
+  "description": "UPI Pay Kit: installable UPI payment modal for React, Next.js, and JavaScript apps",
   "main": "index.js",
-  "keywords": ["upi", "payment", "gateway", "simulator"],
+  "browser": "payment-gateway.js",
+  "files": [
+    "index.js",
+    "payment-gateway.js",
+    "react.js",
+    "README.md",
+    "images"
+  ],
+  "keywords": ["upi", "payment", "gateway", "react", "nextjs", "modal"],
   "author": "Ayush Solanki",
   "license": "MIT",
 
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node -e \"console.log('Use this package inside a browser app. Open index.html for the demo.')\"",
+    "test": "node -e \"console.log('No tests configured')\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ayushsolanki29/payment-gateway.git"
   },
   "type": "commonjs",
+  "exports": {
+    ".": "./index.js",
+    "./react": "./react.js"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
   "bugs": {
     "url": "https://github.com/ayushsolanki29/payment-gateway/issues"
   },

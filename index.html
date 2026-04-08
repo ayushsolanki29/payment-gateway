@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment Gateway Demo</title>
+    <style>
+        :root {
+            --ink: #0f172a;
+            --muted: #475467;
+            --surface: rgba(255, 255, 255, 0.72);
+            --line: rgba(15, 23, 42, 0.08);
+            --brand: #0f5cff;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at top left, rgba(15, 92, 255, 0.18), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.14), transparent 30%),
+                linear-gradient(180deg, #f8fbff, #eef3f8);
+            font-family: "Segoe UI", Arial, sans-serif;
+            padding: 24px;
+        }
+
+        .demo-card {
+            width: min(92vw, 560px);
+            padding: 36px;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: var(--surface);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+            text-align: left;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            margin-bottom: 16px;
+            padding: 8px 12px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--ink);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .demo-card h1 {
+            margin: 0 0 12px;
+            color: var(--ink);
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+
+        .demo-card p {
+            margin: 0 0 26px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 44ch;
+        }
+
+        .demo-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .demo-button {
+            border: 0;
+            border-radius: 999px;
+            padding: 14px 22px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(180deg, #0f5cff, #0847cc);
+            box-shadow: 0 14px 30px rgba(15, 92, 255, 0.22);
+        }
+
+        .demo-meta {
+            color: #667085;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-card">
+        <div class="demo-badge">NPM Package Demo</div>
+        <h1>UPI Payment Gateway</h1>
+        <p>Minimal payment modal for React, Next.js, and JavaScript apps. Open the gateway and test the installable package UI.</p>
+        <div class="demo-actions">
+            <button class="demo-button" id="openGateway">Pay Rs 10.00</button>
+            <span class="demo-meta">Client-side modal API</span>
+        </div>
+    </div>
+
+    <script src="payment-gateway.js"></script>
+    <script>
+        const gateway = createUPIPaymentGateway({
+            amount: 1000,
+            merchantName: "Demo Store",
+            merchantUpiId: "demo@upi",
+            onSuccess: function (transaction) {
+                console.log("Payment success", transaction);
+            }
+        });
+
+        document.getElementById("openGateway").addEventListener("click", function () {
+            gateway.open();
+        });
+    </script>
+</body>
+</html>

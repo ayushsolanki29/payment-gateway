@@ -1,81 +1,131 @@
-# 💳 UPI Payment Gateway Simulator
+# UPI Pay Kit
 
-![UPI Payment Demo](demo.gif)  
-*A complete simulation of UPI payment processing*
+Installable browser package for React, Next.js, or plain JavaScript apps.
 
-## 🌟 Features
+## Install
 
-### Frontend Features
-- ✔️ Modern, responsive UI with smooth animations
-- ✔️ Dual payment options (QR code + UPI apps)
-- ✔️ Real-time input validation for UPI IDs and phone numbers
-- ✔️ Interactive countdown timer (3 minutes)
-- ✔️ Copy-to-clipboard functionality
+```bash
+npm install upi-pay-kit
+```
 
-### Backend Features
-- 🔒 Session-based transaction management
-- ⏱ Simulated payment processing (2-5 seconds)
-- 🎲 Configurable success rate (70% default)
-- 📱 UPI deep linking support
-- 🛡 Basic input sanitization
+For the React wrapper:
 
-## 🛠 Tech Stack
+```bash
+npm install react
+```
 
-| Component       | Technology |
-|----------------|------------|
-| Frontend       | HTML5, CSS3, JavaScript (jQuery) |
-| Backend        | PHP 7.0+ |
-| UI Framework   | Custom CSS with Font Awesome icons |
-| API Simulation | REST-like endpoints |
+## Basic Usage
 
-## 🚀 Quick Start
+```js
+import { createUPIPaymentGateway } from "upi-pay-kit";
 
-### Prerequisites
-- PHP 7.0 or higher
-- Web server (Apache/Nginx) or PHP built-in server
-- Modern web browser
-
-## 📁 Project Structure
-
-
-````
-upi-payment-gateway/
-├── index.html            # Main payment interface
-├── payment-api.php       # Backend API endpoints
-├── thank-you.html        # Payment success page
-├── images/               # Static assets
-│   └── secured.png      # Security 
-````
-## ⚙ Configuration
-### Frontend Configuration (index.php)
-````
-const paymentGateway = new UPIPaymentGateway({
-  amount: 1000,          // Amount in paise (₹10 = 1000 paise)
-  merchantName: 'Your Business Name',
-  merchantUpiId: 'business@upi', 
-  themeColor: '#005bf2'  // Primary button color
+const gateway = createUPIPaymentGateway({
+  amount: 1000,
+  merchantName: "My Store",
+  merchantUpiId: "mystore@upi",
+  theme: "light",
+  size: "md",
+  onSuccess(transaction) {
+    console.log("success", transaction);
+  },
 });
-````
-### Backend Configuration (payment-api.php)
-````
-// Merchant details
-const MERCHANT_UPI_ID = 'business@upi';
-const MERCHANT_NAME = 'Your Business Name';
 
-// Payment settings
-const MIN_AMOUNT = 100;  // Minimum ₹1 (100 paise)
-const SUCCESS_RATE = 0.7; // 70% success probability
-````
+gateway.open();
+```
 
-## 🔄 Payment Flow Diagram
+## React Component
 
-![UPI Payment Demo](images/flow.svg) 
-## 🧪 Testing Scenarios
-- Test Case	Expected Result
-- Valid UPI ID (name@bank)	``Accepts input``
-- Invalid UPI ID (name@)	``Shows error``
-- 10-digit phone number	``Accepts input``
-- 9-digit phone number	``Shows error``
-- Amount < ₹1	``Rejects transaction``
-- Payment success case	Redirects to  thank-you page
-- Payment failure case	``Shows error message ``
+```jsx
+"use client";
+
+import { UPIPaymentButton } from "upi-pay-kit/react";
+
+export default function CheckoutButton() {
+  return (
+    <UPIPaymentButton
+      className="pay-button"
+      gatewayOptions={{
+        amount: 1000,
+        merchantName: "My Store",
+        merchantUpiId: "mystore@upi",
+        theme: "dark",
+        size: "lg",
+      }}
+    >
+      Pay Now
+    </UPIPaymentButton>
+  );
+}
+```
+
+## React Imperative Control
+
+```jsx
+"use client";
+
+import { useRef } from "react";
+import { UPIPaymentButton } from "upi-pay-kit/react";
+
+export default function CheckoutButton() {
+  const paymentRef = useRef(null);
+
+  return (
+    <UPIPaymentButton
+      ref={paymentRef}
+      gatewayOptions={{
+        amount: 1200,
+        merchantName: "My Store",
+        merchantUpiId: "mystore@upi",
+      }}
+    >
+      Pay Now
+    </UPIPaymentButton>
+  );
+}
+```
+
+The forwarded ref exposes:
+
+- `open(overrides?)`
+- `close()`
+- `update(options)`
+- `destroy()`
+- `isOpen()`
+
+## Next.js Note
+
+Initialize this package only in a client component because it needs `window` and `document`.
+
+## API
+
+```js
+const gateway = createUPIPaymentGateway(options);
+```
+
+Available methods:
+
+- `gateway.open(overrides?)`
+- `gateway.close()`
+- `gateway.update(options)`
+- `gateway.destroy()`
+- `gateway.isOpen()`
+
+Important options:
+
+- `amount`: amount in paise
+- `merchantName`
+- `merchantUpiId`
+- `theme`: `"light"` or `"dark"`
+- `size`: `"sm"`, `"md"`, or `"lg"`
+- `themeColor`
+- `ctaLabel`
+- `appButtonLabel`
+- `paymentTimeout`
+- `successRate`
+- `onSuccess(transaction)`
+- `onFailure(transaction)`
+- `onClose(transaction)`
+
+## Demo
+
+Open [index.html](./index.html) in a browser to try the package locally.
