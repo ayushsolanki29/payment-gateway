@@ -1,6 +1,6 @@
 {
   "name": "upi-pay-kit",
-  "version": "3.0.0",
+  "version": "2.0.0",
   "description": "UPI Pay Kit: installable UPI payment modal for React, Next.js, and JavaScript apps",
   "main": "index.js",
   "browser": "payment-gateway.js",
@@ -11,16 +11,10 @@
     "README.md",
     "images"
   ],
-  "keywords": [
-    "upi",
-    "payment",
-    "gateway",
-    "react",
-    "nextjs",
-    "modal"
-  ],
+  "keywords": ["upi", "payment", "gateway", "react", "nextjs", "modal"],
   "author": "Ayush Solanki",
   "license": "MIT",
+
   "scripts": {
     "start": "node -e \"console.log('Use this package inside a browser app. Open index.html for the demo.')\"",
     "test": "node -e \"console.log('No tests configured')\""
